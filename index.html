@@ -2,471 +2,665 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Vihastas – Company Profile</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vihastas — Workspace Design & Turnkey Fit‑outs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
+    /* ── Reset & Base ─────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
     :root {
-      --primary: #184b9b;
-      --primary-light: #e5efff;
-      --dark: #101320;
-      --muted: #6f7280;
-      --bg: #f5f6fa;
-      --card-bg: #ffffff;
-      --accent: #ffb347;
-      --radius: 10px;
+      --black:   #0a0a0a;
+      --dark:    #141414;
+      --grey-900:#1a1a1a;
+      --grey-800:#222222;
+      --grey-700:#2e2e2e;
+      --grey-600:#3a3a3a;
+      --grey-500:#555555;
+      --grey-400:#888888;
+      --grey-300:#aaaaaa;
+      --grey-200:#cccccc;
+      --grey-100:#e8e8e8;
+      --gold:    #c9a84c;
+      --gold-light:#e0c97f;
+      --gold-dark:#a8872e;
+      --white:   #f5f5f0;
     }
 
-    * {
-      box-sizing: border-box;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--dark);
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--grey-200);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--white);
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Utility ──────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section   { padding: 100px 0; }
+    .gold-line {
+      width: 60px; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+    .section-subtitle {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 2.6rem;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    .section-desc {
+      max-width: 640px;
+      color: var(--grey-400);
+      font-size: 1.05rem;
+    }
+
+    /* ── Navigation ───────────────────────────────── */
+    .navbar {
+      position: fixed; top: 0; left: 0; width: 100%;
+      z-index: 1000;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--grey-800);
+      transition: background 0.3s;
+    }
+    .navbar .container {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 76px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .nav-logo img {
+      height: 52px; width: auto;
+    }
+    .nav-logo span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+    .nav-links {
+      display: flex; gap: 32px; list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--grey-300);
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; }
+    .nav-toggle span {
+      display: block; width: 24px; height: 2px;
+      background: var(--gold); margin: 5px 0;
+      transition: 0.3s;
+    }
+
+    /* ── Hero ─────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(201,168,76,0.08) 0%, transparent 60%),
+        var(--black);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('images/logo.png') center center / 320px no-repeat;
+      opacity: 0.04;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-logo {
+      width: 140px; height: 140px;
+      margin: 0 auto 32px;
+      animation: fadeInUp 1s ease;
+    }
+    .hero-logo img { width: 100%; height: 100%; object-fit: contain; }
+    .hero h1 {
+      font-size: 3.4rem;
+      color: var(--white);
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+    .hero h1.gold { color: var(--gold); }
+    .hero .tagline {
+      font-size: 1.15rem;
+      color: var(--grey-400);
+      max-width: 680px;
+      margin: 0 auto 40px;
+      animation: fadeInUp 1s ease 0.4s both;
+    }
+    .hero-cta {
+      display: inline-block;
+      padding: 14px 42px;
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.3s;
+      animation: fadeInUp 1s ease 0.6s both;
+    }
+    .hero-cta:hover {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── About ────────────────────────────────────── */
+    #about { background: var(--dark); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 48px;
+    }
+    .about-text p {
+      margin-bottom: 20px;
+      color: var(--grey-300);
+    }
+    .capability-list {
+      list-style: none;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-top: 24px;
+    }
+    .capability-list li {
+      padding: 10px 16px;
+      background: var(--grey-900);
+      border-left: 3px solid var(--gold);
+      font-size: 0.9rem;
+      color: var(--grey-200);
+      transition: background 0.3s;
+    }
+    .capability-list li:hover { background: var(--grey-800); }
+
+    .about-right h3 {
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+    }
+    .about-right p { color: var(--grey-400); }
+
+    /* ── Services ──────────────────────────────────── */
+    #services { background: var(--black); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 28px;
+      margin-top: 48px;
+    }
+    .service-card {
+      background: var(--grey-900);
+      border: 1px solid var(--grey-800);
+      padding: 36px 28px;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover {
+      border-color: var(--grey-700);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .service-icon {
+      width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: var(--black);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .service-card h4 {
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+    .service-card p {
+      font-size: 0.92rem;
+      color: var(--grey-400);
       line-height: 1.6;
     }
 
-    header {
-      background: linear-gradient(135deg, #0f2b6b, #1e5fd3);
-      color: #fff;
-      padding: 40px 20px 60px;
+    /* ── Projects ──────────────────────────────────── */
+    #projects { background: var(--dark); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
     }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 20px;
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--grey-900);
+      border: 1px solid var(--grey-800);
+      aspect-ratio: 4 / 3;
+      cursor: pointer;
+      transition: border-color 0.3s;
     }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
+    .project-card:hover { border-color: var(--gold); }
+    .project-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s, filter 0.6s;
     }
-
-    .logo-text {
-      font-size: 32px;
-      font-weight: 700;
+    .project-card:hover img {
+      transform: scale(1.06);
+      filter: brightness(0.5);
+    }
+    .project-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .project-card:hover .project-overlay { opacity: 1; }
+    .project-overlay h4 {
+      font-size: 1.15rem;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .project-overlay .location {
+      font-size: 0.82rem;
+      color: var(--grey-300);
+      margin-bottom: 4px;
+    }
+    .project-overlay .scope {
+      font-size: 0.78rem;
+      color: var(--grey-500);
+      text-transform: uppercase;
       letter-spacing: 1px;
     }
-
-    .tagline {
-      font-size: 14px;
-      max-width: 420px;
-      color: #dde6ff;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
-      font-size: 12px;
-      margin-bottom: 10px;
-    }
-
-    nav {
-      margin-top: 18px;
-      font-size: 13px;
-    }
-
-    nav a {
-      color: #e5ecff;
-      text-decoration: none;
-      margin-right: 16px;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    main {
-      margin-top: -32px;
-      padding-bottom: 60px;
-    }
-
-    section {
-      margin-bottom: 32px;
-    }
-
-    h2 {
-      font-size: 22px;
-      margin: 0 0 10px;
-      color: var(--dark);
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 20px 18px;
-      box-shadow: 0 10px 25px rgba(15, 24, 65, 0.08);
-    }
-
-    .muted {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 2fr 1.4fr;
-      gap: 22px;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .chip {
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: var(--primary-light);
-      color: var(--primary);
-    }
-
-    /* Services */
-    .service-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-      margin-top: 10px;
-    }
-
-    .service-item {
-      font-size: 13px;
-      padding: 10px 12px;
-      border-radius: 8px;
-      border: 1px solid #e1e5f4;
-      background: #f8f9ff;
-    }
-
-    .service-item strong {
-      display: block;
-      margin-bottom: 4px;
-      color: var(--primary);
-      font-size: 13px;
-    }
-
-    /* Projects */
-    .project-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
-    }
-
-    .project-card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 14px 14px 16px;
-      border: 1px solid #e3e6f0;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .project-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--primary);
-    }
-
-    .project-meta {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .scope-tag {
-      display: inline-flex;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #fdf3e4;
-      color: #9a5a00;
-      font-size: 11px;
-      margin-top: 4px;
-    }
-
-    .image-placeholder {
-      margin-top: 8px;
-      padding: 8px;
-      border-radius: 8px;
-      border: 1px dashed #c7cce3;
-      font-size: 12px;
-      color: var(--muted);
-      text-align: center;
-      background: #fafbff;
-    }
-
-    /* Team */
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-    }
-
-    .team-card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 14px 14px 16px;
-      border: 1px solid #e3e6f0;
-    }
-
-    .role {
-      font-size: 12px;
-      font-weight: 600;
+    /* placeholder when no image */
+    .project-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--grey-800), var(--grey-900));
+      color: var(--grey-600);
+      font-size: 0.85rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--primary);
-      margin-bottom: 4px;
+      letter-spacing: 2px;
     }
 
-    .name {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 4px;
+    /* ── Contact ───────────────────────────────────── */
+    #contact { background: var(--black); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 48px;
     }
-
-    /* Contact */
     .contact-card {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
+      background: var(--grey-900);
+      border: 1px solid var(--grey-800);
+      padding: 40px;
+    }
+    .contact-card h4 {
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .contact-card p,
+    .contact-card a {
+      color: var(--grey-300);
+      font-size: 0.95rem;
+      line-height: 2;
+    }
+    .contact-card a {
+      display: block;
+      transition: color 0.3s;
+    }
+    .contact-card a:hover { color: var(--gold); }
+
+    /* ── Footer ────────────────────────────────────── */
+    .footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--grey-800);
+      text-align: center;
+      background: var(--dark);
+    }
+    .footer p {
+      font-size: 0.82rem;
+      color: var(--grey-500);
+      letter-spacing: 1px;
+    }
+    .footer .gold { color: var(--gold); }
+
+    /* ── Responsive ────────────────────────────────── */
+    @media (max-width: 992px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+      .section-title { font-size: 2rem; }
+      .hero h1 { font-size: 2.6rem; }
     }
 
-    .contact-item {
-      font-size: 14px;
-    }
-
-    .contact-item span {
-      font-weight: 600;
-      color: var(--dark);
-    }
-
-    a {
-      color: var(--primary);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 800px) {
-      .grid-2 {
-        grid-template-columns: 1fr;
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 76px; left: 0; width: 100%;
+        background: rgba(10,10,10,0.98);
+        padding: 24px;
+        gap: 20px;
+        border-bottom: 1px solid var(--grey-800);
       }
-      header {
-        padding-bottom: 40px;
-      }
-      main {
-        margin-top: -20px;
-      }
+      .projects-grid { grid-template-columns: 1fr; }
+      .capability-list { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2rem; }
+      .hero-logo { width: 100px; height: 100px; }
+      .section { padding: 60px 0; }
     }
   </style>
 </head>
 <body>
-  <header id="top">
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav class="navbar">
     <div class="container">
-      <div class="pill">
-        Workspace Design &amp; Turnkey Fit‑outs
-      </div>
-      <div class="topbar">
-        <div>
-          <div class="logo-text">Vihastas</div>
-          <div class="tagline">
-            Comprehensive workspace solutions – interiors, fitouts, server rooms, centralized ACs, electricals, sensors, furniture, and graphics for modern, high‑performance offices.
-          </div>
-        </div>
-      </div>
-      <nav>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#projects">Projects</a>
-        <a href="#team">Team</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <a href="#" class="nav-logo">
+        <img src="images/logo.png" alt="Vihastas Logo" />
+        <span>VIHASTAS</span>
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </div>
-  </header>
+  </nav>
 
-  <main>
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-logo">
+        <img src="images/logo.png" alt="Vihastas Logo" />
+      </div>
+      <h1 class="gold">VIHASTAS</h1>
+      <p class="tagline">
+        Comprehensive workspace solutions — interiors, fitouts, server rooms, centralised ACs, electricals, sensors, furniture, and graphics for modern, high‑performance offices.
+      </p>
+      <a href="#projects" class="hero-cta">View Our Work</a>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section class="section" id="about">
     <div class="container">
+      <div class="gold-line"></div>
+      <p class="section-subtitle">Who We Are</p>
+      <h2 class="section-title">About Vihastas</h2>
 
-      <!-- About -->
-      <section id="about">
-        <div class="card">
-          <div class="grid-2">
-            <div>
-              <h2>About Vihastas</h2>
-              <p class="muted">
-                Vihastas is a workspace solutions company dedicated to transforming raw spaces into fully functional, aesthetically inspiring, and technologically integrated work environments. We handle interiors, turnkey fitouts, and critical infrastructure so our clients get a single, accountable partner from concept to completion.
-              </p>
-              <p class="muted">
-                Our focus is on designing and delivering offices that enhance productivity, reflect brand personality, and meet the operational realities of growing businesses.
-              </p>
-              <div class="chips">
-                <div class="chip">Corporate interiors</div>
-                <div class="chip">Turnkey fit‑outs</div>
-                <div class="chip">Server rooms</div>
-                <div class="chip">Centralised AC</div>
-                <div class="chip">Electrical &amp; sensors</div>
-                <div class="chip">Furniture &amp; graphics</div>
-              </div>
-            </div>
-            <div>
-              <h2>What We Do</h2>
-              <p class="muted">
-                From design development and space planning to site execution and handover, Vihastas manages every stage of workspace creation. We coordinate civil, MEP, and IT requirements to ensure that aesthetics and functionality work together seamlessly.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Services -->
-      <section id="services">
-        <h2>Our Services</h2>
-        <div class="card">
-          <p class="muted">
-            Vihastas offers integrated services that cover every layer of a modern workspace.
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            Vihastas is a workspace solutions company dedicated to transforming raw spaces into fully functional, aesthetically inspiring, and technologically integrated work environments. We handle interiors, turnkey fitouts, and critical infrastructure so our clients get a single, accountable partner from concept to completion.
           </p>
-          <div class="service-grid">
-            <div class="service-item">
-              <strong>Interior Design &amp; Planning</strong>
-              Professional interior design and layout planning tailored to workspace requirements, user comfort, and brand identity.
-            </div>
-            <div class="service-item">
-              <strong>Turnkey Fitouts</strong>
-              Complete fitout solutions including partitions, ceilings, flooring, joinery, and architectural modifications.
-            </div>
-            <div class="service-item">
-              <strong>Server Rooms &amp; Data Areas</strong>
-              Specialized design and setup for server rooms with proper cooling, access, and security infrastructure.
-            </div>
-            <div class="service-item">
-              <strong>Centralised AC Systems</strong>
-              Design, installation, and optimisation of centralized air‑conditioning and HVAC for efficient climate control.
-            </div>
-            <div class="service-item">
-              <strong>Electrical &amp; Lighting</strong>
-              Complete electrical planning, distribution, lighting, and power management meeting safety and compliance standards.
-            </div>
-            <div class="service-item">
-              <strong>Sensors &amp; Automation</strong>
-              Integration of sensors and smart systems for monitoring, security, energy efficiency, and automated workspace management.
-            </div>
-            <div class="service-item">
-              <strong>Furniture Solutions</strong>
-              Curated furniture and custom installations that combine ergonomics, functionality, and modern aesthetics.
-            </div>
-            <div class="service-item">
-              <strong>Graphics &amp; Branding</strong>
-              Environmental graphics, signage, and branding elements that reinforce company identity throughout the workspace.
-            </div>
-          </div>
+          <p>
+            Our focus is on designing and delivering offices that enhance productivity, reflect brand personality, and meet the operational realities of growing businesses.
+          </p>
+          <ul class="capability-list">
+            <li>Corporate Interiors</li>
+            <li>Turnkey Fit‑outs</li>
+            <li>Server Rooms</li>
+            <li>Centralised AC</li>
+            <li>Electrical &amp; Sensors</li>
+            <li>Furniture &amp; Graphics</li>
+          </ul>
         </div>
-      </section>
-
-      <!-- Projects -->
-      <section id="projects">
-        <h2>Key Projects</h2>
-        <p class="muted" style="margin-bottom:10px;">
-          Recent projects delivered by Vihastas. Replace the placeholders with your actual project photographs.
-        </p>
-        <div class="project-list">
-
-
-	  <div class="project-card">
-            <div class="project-title">Fujitec India Ltd</div>
-            <div class="project-meta">Sattva Magnus, Shaikpet, Hyderabad</div>
-            <div class="scope-tag">Interior – Design &amp; Built (Turnkey)</div>
-            <div class="image-placeholder"><img src="images\Fujitech_logo.png" alt="Fujitech logo" style="width:100%; height:auto; max-height:200px; display:block; margin:0 auto; border-radius:3px; object-fit:contain;"></div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-title">Club Mahindra</div>
-            <div class="project-meta">Begumpet, Hyderabad</div>
-            <div class="scope-tag">Design &amp; Built Built</div>
-            <div class="image-placeholder"><img src="images\Club Mahindra_logo.png" alt="Fujitech logo" style="width:100%; height:auto; max-height:200px; display:block; margin:0 auto; border-radius:8px; object-fit:contain;"></div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-title">Protium Finance</div>
-            <div class="project-meta">11th Floor, T19 Towers, Rani Gunj, Hyderabad</div>
-            <div class="scope-tag">Design &amp; Built (Turnkey)</div>
-            <div class="image-placeholder"><img src="images\Protium_logo.jpg" alt="Fujitech logo" style="width:100%; height:auto; max-height:200px; display:block; margin:0 auto; border-radius:8px; object-fit:contain;"></div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-title">TVS Credits</div>
-            <div class="project-meta">3rd Floor, T19 Towers, Rani Gunj, Hyderabad</div>
-            <div class="scope-tag">Interior – Design &amp; Built (Turnkey)</div>
-            <div class="image-placeholder"><img src="images\TVS Credit_logo.png" alt="Fujitech logo" style="width:100%; height:auto; max-height:200px; display:block; margin:0 auto; border-radius:8px; object-fit:contain;"></div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-title">Birla Shakti Office</div>
-            <div class="project-meta">4th Floor, T19 Towers, Rani Gunj, Hyderabad</div>
-            <div class="scope-tag">Interior – Design &amp; Built (Turnkey)</div>
-            <div class="image-placeholder"><img src="images\birlashakticement_logo.jpg" alt="Fujitech logo" style="width:100%; height:auto; max-height:200px; display:block; margin:0 auto; border-radius:8px; object-fit:contain;"></div>
-          </div>
-
-	   <div class="project-card">
-            <div class="project-title">Ikonz</div>
-            <div class="project-meta">Jyothi Granules, Kondapur, Hyderabad</div>
-            <div class="scope-tag">Interior – Design &amp; Built (Turnkey)</div>
-            <div class="image-placeholder"><img src="images\ikonz_logo.jpg" alt="Fujitech logo" style="width:100%; height:auto; max-height:200px; display:block; margin:0 auto; border-radius:8px; object-fit:contain;"></div>
-          </div>
-
-	   <div class="project-card">
-            <div class="project-title">Bluebell Workspaces</div>
-            <div class="project-meta">Krishi Sappahire, Hyderabad</div>
-            <div class="scope-tag">Interior – Design &amp; Built (Turnkey)</div>
-            <div class="image-placeholder"><img src="images\Bluebell_logo.jpg" alt="Fujitech logo" style="width:100%; height:auto; max-height:200px; display:block; margin:0 auto; border-radius:8px; object-fit:contain;"></div>
-          </div>
-
-	  <div class="project-card">
-            <div class="project-title">MYK Global Solutions INC</div>
-            <div class="project-meta">Sattva Magnus, Shaikpet, Hyderabad</div>
-            <div class="scope-tag">Interior – Design &amp; Built (Turnkey)</div>
-            <div class="image-placeholder"><img src="images\MYKGlobal_logo.jpg" alt="Fujitech logo" style="width:100%; height:auto; max-height:200px; display:block; margin:0 auto; border-radius:8px; object-fit:contain;"></div>
-          </div>
-
-	  <div class="project-card">
-            <div class="project-title">Coforge</div>
-            <div class="project-meta">Gachibowli, Hyderabad</div>
-            <div class="scope-tag">Built (Turnkey)</div>
-            <div class="image-placeholder"><img src="images\Coforge_logo.png" alt="Fujitech logo" style="width:100%; height:auto; max-height:200px; display:block; margin:0 auto; border-radius:8px; object-fit:contain;"></div>
-          </div>
-
-
-      <!-- Contact -->
-      <section id="contact">
-        <h2>Contact</h2>
-        <div class="card contact-card">
-          <div class="contact-item">
-            <span>Vihasta’s Facilities</span><br />
-            Sales Contact: 9030120244
-          </div>
-          <div class="contact-item">
-            <span>Email</span><br />
-            <a href="mailto:sales@vihastas.com">sales@vihastas.com</a><br />
-            <a href="mailto:vihastasfacilities@gmail.com">vihastasfacilities@gmail.com</a>
-          </div>
+        <div class="about-right">
+          <h3>What We Do</h3>
+          <p>
+            From design development and space planning to site execution and handover, Vihastas manages every stage of workspace creation. We coordinate civil, MEP, and IT requirements to ensure that aesthetics and functionality work together seamlessly.
+          </p>
         </div>
-      </section>
-
+      </div>
     </div>
-  </main>
+  </section>
+
+  <!-- ═══ SERVICES ═══ -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="gold-line"></div>
+      <p class="section-subtitle">What We Offer</p>
+      <h2 class="section-title">Our Services</h2>
+      <p class="section-desc">Vihastas offers integrated services that cover every layer of a modern workspace.</p>
+
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-icon">ID</div>
+          <h4>Interior Design &amp; Planning</h4>
+          <p>Professional interior design and layout planning tailored to workspace requirements, user comfort, and brand identity.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">TF</div>
+          <h4>Turnkey Fitouts</h4>
+          <p>Complete fitout solutions including partitions, ceilings, flooring, joinery, and architectural modifications.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">SR</div>
+          <h4>Server Rooms &amp; Data Areas</h4>
+          <p>Specialized design and setup for server rooms with proper cooling, access, and security infrastructure.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">AC</div>
+          <h4>Centralised AC Systems</h4>
+          <p>Design, installation, and optimisation of centralized air‑conditioning and HVAC for efficient climate control.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">EL</div>
+          <h4>Electrical &amp; Lighting</h4>
+          <p>Complete electrical planning, distribution, lighting, and power management meeting safety and compliance standards.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">SA</div>
+          <h4>Sensors &amp; Automation</h4>
+          <p>Integration of sensors and smart systems for monitoring, security, energy efficiency, and automated workspace management.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">FS</div>
+          <h4>Furniture Solutions</h4>
+          <p>Curated furniture and custom installations that combine ergonomics, functionality, and modern aesthetics.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">GB</div>
+          <h4>Graphics &amp; Branding</h4>
+          <p>Environmental graphics, signage, and branding elements that reinforce company identity throughout the workspace.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROJECTS ═══ -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="gold-line"></div>
+      <p class="section-subtitle">Our Portfolio</p>
+      <h2 class="section-title">Key Projects</h2>
+      <p class="section-desc">Recent projects delivered by Vihastas.</p>
+
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <img src="images/fujitec.jpg" alt="Fujitec India Ltd" />
+          <div class="project-overlay">
+            <h4>Fujitec India Ltd</h4>
+            <p class="location">Sattva Magnus, Shaikpet, Hyderabad</p>
+            <p class="scope">Interior — Design &amp; Built (Turnkey)</p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="images/club-mahindra.jpg" alt="Club Mahindra" />
+          <div class="project-overlay">
+            <h4>Club Mahindra</h4>
+            <p class="location">Begumpet, Hyderabad</p>
+            <p class="scope">Design &amp; Built</p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="images/protium.jpg" alt="Protium Finance" />
+          <div class="project-overlay">
+            <h4>Protium Finance</h4>
+            <p class="location">11th Floor, T19 Towers, Rani Gunj, Hyderabad</p>
+            <p class="scope">Design &amp; Built (Turnkey)</p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="images/tvs-credits.jpg" alt="TVS Credits" />
+          <div class="project-overlay">
+            <h4>TVS Credits</h4>
+            <p class="location">3rd Floor, T19 Towers, Rani Gunj, Hyderabad</p>
+            <p class="scope">Interior — Design &amp; Built (Turnkey)</p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="images/birla-shakti.jpg" alt="Birla Shakti Office" />
+          <div class="project-overlay">
+            <h4>Birla Shakti Office</h4>
+            <p class="location">4th Floor, T19 Towers, Rani Gunj, Hyderabad</p>
+            <p class="scope">Interior — Design &amp; Built (Turnkey)</p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="images/ikonz.jpg" alt="Ikonz" />
+          <div class="project-overlay">
+            <h4>Ikonz</h4>
+            <p class="location">Jyothi Granules, Kondapur, Hyderabad</p>
+            <p class="scope">Interior — Design &amp; Built (Turnkey)</p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="images/bluebell.jpg" alt="Bluebell Workspaces" />
+          <div class="project-overlay">
+            <h4>Bluebell Workspaces</h4>
+            <p class="location">Krishi Sapphire, Hyderabad</p>
+            <p class="scope">Interior — Design &amp; Built (Turnkey)</p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="images/myk-global.jpg" alt="MYK Global Solutions INC" />
+          <div class="project-overlay">
+            <h4>MYK Global Solutions INC</h4>
+            <p class="location">Sattva Magnus, Shaikpet, Hyderabad</p>
+            <p class="scope">Interior — Design &amp; Built (Turnkey)</p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="images/coforge.jpg" alt="Coforge" />
+          <div class="project-overlay">
+            <h4>Coforge</h4>
+            <p class="location">Gachibowli, Hyderabad</p>
+            <p class="scope">Built (Turnkey)</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="gold-line"></div>
+      <p class="section-subtitle">Get In Touch</p>
+      <h2 class="section-title">Contact</h2>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h4>Vihasta's Facilities</h4>
+          <p>Sales Contact: <a href="tel:9030120244">9030120244</a></p>
+        </div>
+        <div class="contact-card">
+          <h4>Email</h4>
+          <a href="mailto:sales@vihastas.com">sales@vihastas.com</a>
+          <a href="mailto:vihastasfacilities@gmail.com">vihastasfacilities@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 <span class="gold">Vihastas</span>. All rights reserved.</p>
+    </div>
+  </footer>
+
 </body>
 </html>
