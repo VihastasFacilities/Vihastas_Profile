@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vihastas – Company Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --primary: #184b9b;
+      --primary-light: #e5efff;
+      --dark: #101320;
+      --muted: #6f7280;
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #ffb347;
+      --radius: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f2b6b, #1e5fd3);
+      color: #fff;
+      padding: 40px 20px 60px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .logo-text {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .tagline {
+      font-size: 14px;
+      max-width: 420px;
+      color: #dde6ff;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    nav {
+      margin-top: 18px;
+      font-size: 13px;
+    }
+
+    nav a {
+      color: #e5ecff;
+      text-decoration: none;
+      margin-right: 16px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      margin-top: -32px;
+      padding-bottom: 60px;
+    }
+
+    section {
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin: 0 0 10px;
+      color: var(--dark);
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 20px 18px;
+      box-shadow: 0 10px 25px rgba(15, 24, 65, 0.08);
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 2fr 1.4fr;
+      gap: 22px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* Services */
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .service-item {
+      font-size: 13px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #e1e5f4;
+      background: #f8f9ff;
+    }
+
+    .service-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--primary);
+      font-size: 13px;
+    }
+
+    /* Projects */
+    .project-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 14px 14px 16px;
+      border: 1px solid #e3e6f0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .project-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .project-meta {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .scope-tag {
+      display: inline-flex;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #fdf3e4;
+      color: #9a5a00;
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    .image-placeholder {
+      margin-top: 8px;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px dashed #c7cce3;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      background: #fafbff;
+    }
+
+    /* Team */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .team-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 14px 14px 16px;
+      border: 1px solid #e3e6f0;
+    }
+
+    .role {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .name {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    /* Contact */
+    .contact-card {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .contact-item {
+      font-size: 14px;
+    }
+
+    .contact-item span {
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 800px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+      header {
+        padding-bottom: 40px;
+      }
+      main {
+        margin-top: -20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="top">
+    <div class="container">
+      <div class="pill">
+        Workspace Design &amp; Turnkey Fit‑outs
+      </div>
+      <div class="topbar">
+        <div>
+          <div class="logo-text">Vihastas</div>
+          <div class="tagline">
+            Comprehensive workspace solutions – interiors, fitouts, server rooms, centralized ACs, electricals, sensors, furniture, and graphics for modern, high‑performance offices.
+          </div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#team">Team</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <!-- About -->
+      <section id="about">
+        <div class="card">
+          <div class="grid-2">
+            <div>
+              <h2>About Vihastas</h2>
+              <p class="muted">
+                Vihastas is a workspace solutions company dedicated to transforming raw spaces into fully functional, aesthetically inspiring, and technologically integrated work environments. We handle interiors, turnkey fitouts, and critical infrastructure so our clients get a single, accountable partner from concept to completion.
+              </p>
+              <p class="muted">
+                Our focus is on designing and delivering offices that enhance productivity, reflect brand personality, and meet the operational realities of growing businesses.
+              </p>
+              <div class="chips">
+                <div class="chip">Corporate interiors</div>
+                <div class="chip">Turnkey fit‑outs</div>
+                <div class="chip">Server rooms</div>
+                <div class="chip">Centralised AC</div>
+                <div class="chip">Electrical &amp; sensors</div>
+                <div class="chip">Furniture &amp; graphics</div>
+              </div>
+            </div>
+            <div>
+              <h2>What We Do</h2>
+              <p class="muted">
+                From design development and space planning to site execution and handover, Vihastas manages every stage of workspace creation. We coordinate civil, MEP, and IT requirements to ensure that aesthetics and functionality work together seamlessly.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services -->
+      <section id="services">
+        <h2>Our Services</h2>
+        <div class="card">
+          <p class="muted">
+            Vihastas offers integrated services that cover every layer of a modern workspace.
+          </p>
+          <div class="service-grid">
+            <div class="service-item">
+              <strong>Interior Design &amp; Planning</strong>
+              Professional interior design and layout planning tailored to workspace requirements, user comfort, and brand identity.
+            </div>
+            <div class="service-item">
+              <strong>Turnkey Fitouts</strong>
+              Complete fitout solutions including partitions, ceilings, flooring, joinery, and architectural modifications.
+            </div>
+            <div class="service-item">
+              <strong>Server Rooms &amp; Data Areas</strong>
+              Specialized design and setup for server rooms with proper cooling, access, and security infrastructure.
+            </div>
+            <div class="service-item">
+              <strong>Centralised AC Systems</strong>
+              Design, installation, and optimisation of centralized air‑conditioning and HVAC for efficient climate control.
+            </div>
+            <div class="service-item">
+              <strong>Electrical &amp; Lighting</strong>
+              Complete electrical planning, distribution, lighting, and power management meeting safety and compliance standards.
+            </div>
+            <div class="service-item">
+              <strong>Sensors &amp; Automation</strong>
+              Integration of sensors and smart systems for monitoring, security, energy efficiency, and automated workspace management.
+            </div>
+            <div class="service-item">
+              <strong>Furniture Solutions</strong>
+              Curated furniture and custom installations that combine ergonomics, functionality, and modern aesthetics.
+            </div>
+            <div class="service-item">
+              <strong>Graphics &amp; Branding</strong>
+              Environmental graphics, signage, and branding elements that reinforce company identity throughout the workspace.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects">
+        <h2>Key Projects</h2>
+        <p class="muted" style="margin-bottom:10px;">
+          Recent projects delivered by Vihastas. Replace the placeholders with your actual project photographs.
+        </p>
+        <div class="project-list">
+
+
+	  <div class="project-card">
+            <div class="project-title">Fujitec India Ltd</div>
+            <div class="project-meta">Sattva Magnus, Shaikpet, Hyderabad</div>
+            <div class="scope-tag">Interior – Design &amp; Built (Turnkey)</div>
+            <div class="image-placeholder"><img src="C:\Users\ptirumalasetty\Downloads\Fujitech_logo.png" alt="Fujitech logo" style="width:100%; height:auto; max-height:200px; display:block; margin:0 auto; border-radius:3px; object-fit:contain;"></div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-title">Club Mahindra</div>
+            <div class="project-meta">Begumpet, Hyderabad</div>
+            <div class="scope-tag">Design &amp; Built Built</div>
+            <div class="image-placeholder"><img src="C:\Users\ptirumalasetty\Downloads\Club Mahindra_logo.png" alt="Fujitech logo" style="width:100%; height:auto; max-height:200px; display:block; margin:0 auto; border-radius:8px; object-fit:contain;"></div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-title">Protium Finance</div>
+            <div class="project-meta">11th Floor, T19 Towers, Rani Gunj, Hyderabad</div>
+            <div class="scope-tag">Design &amp; Built (Turnkey)</div>
+            <div class="image-placeholder"><img src="C:\Users\ptirumalasetty\Downloads\Protium_logo.jpg" alt="Fujitech logo" style="width:100%; height:auto; max-height:200px; display:block; margin:0 auto; border-radius:8px; object-fit:contain;"></div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-title">TVS Credits</div>
+            <div class="project-meta">3rd Floor, T19 Towers, Rani Gunj, Hyderabad</div>
+            <div class="scope-tag">Interior – Design &amp; Built (Turnkey)</div>
+            <div class="image-placeholder"><img src="C:\Users\ptirumalasetty\Downloads\TVS Credit_logo.png" alt="Fujitech logo" style="width:100%; height:auto; max-height:200px; display:block; margin:0 auto; border-radius:8px; object-fit:contain;"></div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-title">Birla Shakti Office</div>
+            <div class="project-meta">4th Floor, T19 Towers, Rani Gunj, Hyderabad</div>
+            <div class="scope-tag">Interior – Design &amp; Built (Turnkey)</div>
+            <div class="image-placeholder"><img src="C:\Users\ptirumalasetty\Downloads\birlashakticement_logo.jpg" alt="Fujitech logo" style="width:100%; height:auto; max-height:200px; display:block; margin:0 auto; border-radius:8px; object-fit:contain;"></div>
+          </div>
+
+	   <div class="project-card">
+            <div class="project-title">Ikonz</div>
+            <div class="project-meta">Jyothi Granules, Kondapur, Hyderabad</div>
+            <div class="scope-tag">Interior – Design &amp; Built (Turnkey)</div>
+            <div class="image-placeholder"><img src="C:\Users\ptirumalasetty\Downloads\ikonz_logo.jpg" alt="Fujitech logo" style="width:100%; height:auto; max-height:200px; display:block; margin:0 auto; border-radius:8px; object-fit:contain;"></div>
+          </div>
+
+	   <div class="project-card">
+            <div class="project-title">Bluebell Workspaces</div>
+            <div class="project-meta">Krishi Sappahire, Hyderabad</div>
+            <div class="scope-tag">Interior – Design &amp; Built (Turnkey)</div>
+            <div class="image-placeholder"><img src="C:\Users\ptirumalasetty\Downloads\Bluebell_logo.jpg" alt="Fujitech logo" style="width:100%; height:auto; max-height:200px; display:block; margin:0 auto; border-radius:8px; object-fit:contain;"></div>
+          </div>
+
+	  <div class="project-card">
+            <div class="project-title">MYK Global Solutions INC</div>
+            <div class="project-meta">Sattva Magnus, Shaikpet, Hyderabad</div>
+            <div class="scope-tag">Interior – Design &amp; Built (Turnkey)</div>
+            <div class="image-placeholder"><img src="C:\Users\ptirumalasetty\Downloads\MYKGlobal_logo.jpg" alt="Fujitech logo" style="width:100%; height:auto; max-height:200px; display:block; margin:0 auto; border-radius:8px; object-fit:contain;"></div>
+          </div>
+
+	  <div class="project-card">
+            <div class="project-title">Coforge</div>
+            <div class="project-meta">Gachibowli, Hyderabad</div>
+            <div class="scope-tag">Built (Turnkey)</div>
+            <div class="image-placeholder"><img src="C:\Users\ptirumalasetty\Downloads\Coforge_logo.png" alt="Fujitech logo" style="width:100%; height:auto; max-height:200px; display:block; margin:0 auto; border-radius:8px; object-fit:contain;"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Team -->
+      <section id="team">
+        <h2>Our Team</h2>
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="role">Proprietor</div>
+            <div class="name">Mrs. Pranathi</div>
+            <p class="muted">
+              Mrs. Pranathi is passionate about creating spaces that are both functional and aesthetically inspiring, combining creativity, functionality, and a deep understanding of design principles. With experience in design and planning across residential and commercial spaces, she crafts environments that reflect the personality and needs of each client.
+            </p>
+          </div>
+
+          <div class="team-card">
+            <div class="role">Lead Designer</div>
+            <div class="name">Mr. Tejas</div>
+            <p class="muted">
+              Mr. Tejas has 10+ years of experience in commercial interior design. His approach begins with understanding the client’s business strategy, culture, and branding requirements, then translating them into innovative designs that deliver functional, productive, and creative work environments across corporate, pharmaceuticals, banking, IT, and finance sectors.
+            </p>
+          </div>
+
+          <div class="team-card">
+            <div class="role">Project Lead</div>
+            <div class="name">Mr. Sudheer</div>
+            <p class="muted">
+              Mr. Naga Sudheer brings over 15 years of experience in construction, business development, operations oversight, and quality performance. He manages all levels of projects, from project and construction management to analyzing schedules and estimates, and has worked with various corporate interior design and design‑and‑build architect firms.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact">
+        <h2>Contact</h2>
+        <div class="card contact-card">
+          <div class="contact-item">
+            <span>Vihasta’s Facilities</span><br />
+            Sales Contact: 9030120244
+          </div>
+          <div class="contact-item">
+            <span>Email</span><br />
+            <a href="mailto:sales@vihastas.com">sales@vihastas.com</a><br />
+            <a href="mailto:vihastasfacilities@gmail.com">vihastasfacilities@gmail.com</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</body>
+</html>
